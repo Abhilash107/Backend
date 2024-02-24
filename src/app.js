@@ -1,25 +1,53 @@
+// import express from 'express';
+// import cookieParser from 'cookie-parser';
+// import cors from 'cors';
+
+// const app= express();
+
+// app.use(cors({
+//     origin: process.env.CORS_ORIGIN,
+//     credentials:true
+// }))
+
+// app.use(express.json({limit: "20kb"}))
+// app.use(express.urlencoded({extended: true,limit: "20kb"}))
+// app.use(express.static("public"))
+// app.use(cookieParser())
+
+// //routes import
+// import userRouter from './routes/user.routes.js';
+// // routes declaration
+
+// //app.use('/users' , userRouter)
+// app.use('api/v1/users',userRouter);
+
+
+// export default   {app} ;
+
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
-const app= express();
+const app = express();
 
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
     credentials:true
-}))
+}));
 
+app.use(express.json({limit: "20kb"}));
+app.use(express.urlencoded({extended: true,limit: "20kb"}));
+app.use(express.static("public"));
+app.use(cookieParser());
 
-app.use(express.json({limit: "20kb"}))
+// Import routes
+import userRouter from './routes/user.routes.js';
 
-app.use(express.urlencoded({extended: true,limit: "20kb"}))
+// Use routes
+app.use('/api/v1/users', userRouter);
 
-app.use(express.static("public"))
+export default app;
 
-app.use(cookieParser())
-
-
-export { app }
 
 //Express.js is a minimalist web application framework for Node.js, designed to build web applications and APIs. It provides a robust set of features for web and mobile applications, simplifying the process of creating server-side applications in JavaScript.
 
