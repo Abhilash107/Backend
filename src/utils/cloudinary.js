@@ -1,39 +1,58 @@
 import {v2 as cloudinary} from 'cloudinary';
 import { response } from 'express';
 import fs from 'fs';
-
-          
+       
 cloudinary.config({ 
-  cloud_name: process.env.CLODINARY_CLOUD_NAME  , 
-  api_key: process.env.CLODINARY_API_KEY , 
-  api_secret: process.env.CLODINARY_API_SECRET
+  cloud_name:process.env.CLODINARY_CLOUD_NAME, 
+  api_key:process.env.CLODINARY_API_KEY, 
+  api_secret:process.env.CLODINARY_API_SECRET
 });
 
-
-export const uploadOnCloudinary = async (localFilePath) =>{
+export const uploadOnCloudinary = async (localFilePath) => {
     try {
         if (!localFilePath) {
             return null; 
         }
-        await cloudinary.uploader.upload(localFilePath, {
-            resource_type:'auto'
         
-        })
-        //file has been uploaded successfully
-        console.log('file uploaded on cloudinary',response.url);
+        const result = await cloudinary.uploader.upload(localFilePath, {
+            resource_type: 'auto'
+        });
+        
+        // File has been uploaded successfully
+        console.log('File uploaded on Cloudinary:', response.url);
         return response;
-        
     } catch (error) {
-        fs.unlinkSync(localFilePath);
-        //removes the locally saved temp file
-
+        //fs.unlinkSync(localFilePath);
+        // Removes the locally saved temp file
+        console.error('Error uploading file to Cloudinary:', error);
         return null;
-        
     }
-}
+};
 
 
+// export const uploadOnCloudinary = async (localFilePath) => {
+//     try {
+//         if (!localFilePath) {
+//             return null; 
+//         }
+        
+//         const result = await cloudinary.uploader.upload(localFilePath, {
+//             resource_type: 'auto'
+//         });
+        
+//         // File has been uploaded successfully
+//         console.log('File uploaded on Cloudinary:', result.url);
+//         return result;
+//     } catch (error) {
+//         //fs.unlinkSync(localFilePath);
+//         // Removes the locally saved temp file
+//         console.error('Error uploading file to Cloudinary:', error);
+//         return null;
+//     }
+// };
 
-cloudinary.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
-  { public_id: "olympic_flag" }, 
-  function(error, result) {console.log(result); });
+// // Example usage of uploadOnCloudinary function
+// cloudinary.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
+//   { public_id: "olympic_flag" }, 
+//   function(error, result) {console.log(result); });
+
