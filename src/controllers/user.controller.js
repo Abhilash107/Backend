@@ -50,17 +50,11 @@ const registerUser = asyncHandler( async (req,res) =>{
     // const coverImageLocalpath = req.files?.coverImage[0];
     const coverImageLocalpath = req.files?.coverImage && req.files.coverImage[0];
 
-    // if(!avatarLocalpath){
-    //     throw new  ApiError( 400, "file required")
-    // }
-
-    if (!avatarLocalpath) {
-        // Handle the case where avatarLocalpath is undefined
-        console.error('Avatar path is undefined');
-        // Respond with an error to the client or take appropriate action
-    } else {
-        // Continue with your code using avatarLocalpath
+    if(!avatarLocalpath){
+        throw new  ApiError( 400, "file required")
     }
+
+   
     
 
     //5.
