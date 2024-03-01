@@ -5,7 +5,7 @@ import { ApiResponse } from '../utils/ApiResponse.js';
 import { uploadOnCloudinary } from '../utils/cloudinary.js';
 
 
-const registerUser = asyncHandler( async (req,res) =>{
+const registerUser = asyncHandler( async (req ,res) =>{
     //1. get user details from front-end
     //2. validation
     //3. user exists or not:  check username or email
@@ -15,6 +15,7 @@ const registerUser = asyncHandler( async (req,res) =>{
     //7. remove password and refresh token field from response --- imp
     //8. check for user creation
     //9. return res
+    console.log("req.files:", req.files);
 
     const {fullname, email, username, password} = req.body
     console.log("email", email);
@@ -50,9 +51,26 @@ const registerUser = asyncHandler( async (req,res) =>{
     // const coverImageLocalpath = req.files?.coverImage[0];
     const coverImageLocalpath = req.files?.coverImage && req.files.coverImage[0];
 
-    if(!avatarLocalpath){
-        throw new ApiError( 400, "file required")
+    // if(!avatarLocalpath){
+    //     throw new ApiError( 400, "file required")
+    // }
+
+    
+    // console.log("req.files.avatar:", req.files.avatar);
+    // console.log("req.files.avatar[0]:", req.files.avatar[0]);
+    // console.log("avatarLocalpath:", avatarLocalpath);
+
+
+
+
+
+
+
+
+    if (!req.files || !req.files.avatar || !req.files.avatar[0] || !req.files.avatar[0].path){
+        throw new ApiError(400, "Avatar file required"); // line 54
     }
+    
 
    
     

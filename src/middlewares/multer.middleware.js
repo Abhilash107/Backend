@@ -16,10 +16,10 @@ import multer from "multer";
 import path from "path";
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
+    destination: function (_req, file, cb) {
       cb(null, path.join(__dirname, '../public/TEMP')); // Adjust the path as needed
     },
-    filename: function (req, file, cb) {
+    filename: function (_req, file, cb) {
       cb(null, file.originalname);    
     }
 });
