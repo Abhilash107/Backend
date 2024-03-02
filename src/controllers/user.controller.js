@@ -15,10 +15,10 @@ const registerUser = asyncHandler( async (req ,res) =>{
     //7. remove password and refresh token field from response --- imp
     //8. check for user creation
     //9. return res
-    console.log("req.files:", req.files);
+    console.log("req.files:", req);
 
     const {fullname, email, username, password} = req.body
-    console.log("email", email);
+    //console.log("email", email);
 
     //1.
 
@@ -49,35 +49,19 @@ const registerUser = asyncHandler( async (req ,res) =>{
     const avatarLocalpath = req.files?.avatar && req.files.avatar[0]?.path;
 
     // const coverImageLocalpath = req.files?.coverImage[0];
-    const coverImageLocalpath = req.files?.coverImage && req.files.coverImage[0];
+    //const coverImageLocalpath = req.files?.coverImage && req.files.coverImage[0];
 
     // if(!avatarLocalpath){
     //     throw new ApiError( 400, "file required")
     // }
 
-    
-    // console.log("req.files.avatar:", req.files.avatar);
-    // console.log("req.files.avatar[0]:", req.files.avatar[0]);
-    // console.log("avatarLocalpath:", avatarLocalpath);
-
-
-
-
-
-
-
-
     if (!req.files || !req.files.avatar || !req.files.avatar[0] || !req.files.avatar[0].path){
-        throw new ApiError(400, "Avatar file required"); // line 54
+        throw new ApiError(400, "Avatar file required");
     }
-    
-
-   
-    
 
     //5.
     const avatar =await uploadOnCloudinary(avatarLocalpath);
-    const coverImage =await uploadOnCloudinary(coverImageLocalpath);
+    //const coverImage =await uploadOnCloudinary(coverImageLocalpath);
 
     if (!avatar || !avatar.url) {
         throw new ApiError(400, "Avatar upload failed");
@@ -87,7 +71,7 @@ const registerUser = asyncHandler( async (req ,res) =>{
     const user = await User.create({
         fullname,
         avatar:avatar.url,
-        coverImage:coverImage?.url || "",
+        //coverImage:coverImage?.url || "",
         email,
         password,
         username:username.toLowerCase(),
@@ -111,7 +95,7 @@ const registerUser = asyncHandler( async (req ,res) =>{
 
 })
 
-export {registerUser};
+export { registerUser };
 
 
 
@@ -186,6 +170,11 @@ export {registerUser};
 // });
 
 // export { registerUser };
+
+
+
+
+
 
 
 

@@ -2,6 +2,8 @@ import { Router } from "express";
 import { upload }from '../middlewares/multer.middleware.js'
 import { registerUser } from "../controllers/user.controller.js";
 const router = Router();
+console.log("Received a request");
+
 
 router.route('/register').post( upload.fields(
     [
@@ -14,7 +16,7 @@ router.route('/register').post( upload.fields(
             name:"coverImage",
             maxCount:1
 
-        }
+        }  
     ]),
     registerUser)
 
