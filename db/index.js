@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { DB_NAME } from "../constants.js";
+import { DB_NAME } from "../src/constants.js";
 // 1.  try catch wrapping OR promises (resolve )
 
 const connectDB = async () => {

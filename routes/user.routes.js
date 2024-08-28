@@ -7,8 +7,6 @@ import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 
 const router = Router();
-console.log("Received a request");
-
 
 router.route('/register').post( 
     upload.fields(
@@ -16,12 +14,10 @@ router.route('/register').post(
         {
             name: "avatar",
             maxCount:1
-
         },
         {
             name:"coverImage",
             maxCount:1
-
         }  
     ]),
     registerUser)

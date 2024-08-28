@@ -14,11 +14,7 @@ const genAccessAndRefreshTokens = async(userId) => {
 
         user.refreshToken= refreshToken;
         await user.save({ValidateBeforeSave: false});
-
         return{accessToken , refreshToken}
-
-
-
     } catch (error) {
         throw new ApiError(500, 'Something went wrong')
         
@@ -173,15 +169,6 @@ const loginUser = asyncHandler(async (req, res) =>{
         )
 
     )
-
-
-
-
-
-
-
-
-
 })
 
 const logoutUser = asyncHandler(async (req, res)=> {
@@ -196,8 +183,6 @@ const logoutUser = asyncHandler(async (req, res)=> {
     })    
 
 })
-
-
 
 export { registerUser, loginUser,logoutUser };
 
