@@ -16,9 +16,11 @@ app.use(cookieParser());
 
 // Import routes
 import userRouter from '../routes/user.routes.js';
+import promptRouter from '../routes/prompt.routes.js'
 
 // Use routes
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/users', promptRouter)
 
 export default app;
 
