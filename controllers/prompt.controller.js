@@ -27,7 +27,7 @@ const getResponse = asyncHandler( async (req, res)=>{
     return res
         .status(200)
         .json(
-            new ApiResponse(200, {responseText: prompt.responseText})
+            new ApiResponse(200, {responseText: prompt})
         )
 })
 

@@ -10,6 +10,10 @@ const promptSchema = new mongoose.Schema({
         type: String,
         unique: true,
         index: true,
+    },
+    picture: {
+        type:String,
+        required: true,
     }
 
 }, {timestamps: true})
